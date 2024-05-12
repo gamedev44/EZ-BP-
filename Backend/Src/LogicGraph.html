@@ -1,9 +1,8 @@
-<!DOCTYPE htmX>
-<!-- THIS IS A SIMPLE TO USE BP SCRIPTING LANGUAGE AND SERIALIZER IVE BEEN WANTING TO MAKE FOR SOME TIME SO HERE GOES MY BEST FIRST FEW HOURS ATTEMPT.-->
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ez-BP+ By: PGD</title>
+<title>EZ-BP+.APP</title>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
     body { font-family: Arial, sans-serif; padding: 20px; }
@@ -18,13 +17,9 @@
 </style>
 </head>
 <body>
-
-    <h1> EZ-BP+ Blueprint Superset Language Prototype by: PGD</h1>
-
-
 <div class="container">
     <label for="keyInput">Enter a Key:</label>
-    <input type="text" id="keyInput" placeholder="Type 'When Level Starts' or 'IF Key Pressed'" oninput="showSuggestions(this.value)">
+    <input type="text" id="keyInput" placeholder="Type 'OnEvent Begin Play' or 'KeyPress Node ID'" oninput="showSuggestions(this.value)">
     <div id="suggestions"></div>
     <label for="customKey" id="customKeyLabel" style="display: none;">Enter Custom Key:</label>
     <input type="text" id="customKey" style="display: none;">
@@ -36,26 +31,61 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script>
-
-
- // Fully Custom Dictionary database of Blueprint data parsed directly from ue5.3 Built By: Asterisk @ PGD
+ // dictionary database of Blueprint data parsed directly from ue5.3
       const suggestions = {
-
-       
-       
-        //Built in Events
-    "When Level Starts": `Begin Object Class=/Script/BlueprintGraph.K2Node_Event Name="K2Node_Event_0" ExportPath="/Script/BlueprintGraph.K2Node_Event'/Game/GameName/General_Blueprints:EventGraph.K2Node_Event_0'\nEventReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.Actor'",MemberName="ReceiveBeginPlay")\nEnabledState=Disabled\nbCommentBubblePinned=True\nbCommentBubbleVisible=True\nNodeComment="This node is disabled and will not be called.\\nDrag off pins to build functionality. version by PGD"\nNodeGuid=BCC2B55647213F8983851AA57F902D7B\nEnd Object`,
+        // Built in Commands
+    "onevent begin play": `Begin Object Class=/Script/BlueprintGraph.K2Node_Event Name="K2Node_Event_0" ExportPath="/Script/BlueprintGraph.K2Node_Event'/Game/GameName/General_Blueprints:EventGraph.K2Node_Event_0'\nEventReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.Actor'",MemberName="ReceiveBeginPlay")\nEnabledState=Disabled\nbCommentBubblePinned=True\nbCommentBubbleVisible=True\nNodeComment="This node is disabled and will not be called.\\nDrag off pins to build functionality. version by PGD"\nNodeGuid=BCC2B55647213F8983851AA57F902D7B\nEnd Object`,
+    
+       // Input Action Dynamic
+    "keypress node id": `Begin Object Class=/Script/BlueprintGraph.K2Node_InputKey Name="K2Node_InputKey_0" ExportPath="/Script/BlueprintGraph.K2Node_InputKey'/Game/GameName/General_Blueprints:EventGraph.K2Node_InputKey_0'\nInputKey="UserSpecifiedKey"\nNodePosX=-0\nNodePosY=0\nEnabledState=Disabled\nbCommentBubblePinned=True\nbCommentBubbleVisible=True\nNodeComment="This node is disabled and will not be called.\\nDrag off pins to build functionality. version by PGD"\nNodeGuid=6C28422145B8C100C18DED8333ED8EE5\nEnd Object`,
     
     
-       // Custom Input Action Binding Integration Event Dynamic
-    "IF Key Pressed": `Begin Object Class=/Script/BlueprintGraph.K2Node_InputKey Name="K2Node_InputKey_0" ExportPath="/Script/BlueprintGraph.K2Node_InputKey'/Game/GameName/General_Blueprints:EventGraph.K2Node_InputKey_0'\nInputKey="UserSpecifiedKey"\nNodePosX=-0\nNodePosY=0\nEnabledState=Disabled\nbCommentBubblePinned=True\nbCommentBubbleVisible=True\nNodeComment="This node is disabled and will not be called.\\nDrag off pins to build functionality. version by PGD"\nNodeGuid=6C28422145B8C100C18DED8333ED8EE5\nEnd Object`,
-    
-
-
-      // Custom Prefab Event Code
-    "Play Background Music": `Begin Object Class=/Script/BlueprintGraph.K2Node_Event Name="K2Node_Event_0" ExportPath="/Script/BlueprintGraph.K2Node_Event'/Game/GameName/General/Blueprints:EventGraph.K2Node_Event_0'" EventReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.Actor'",MemberName="ReceiveBeginPlay") bOverrideFunction=True NodePosX=0 NodePosY=-0 bCommentBubblePinned=True NodeGuid=BCC2B55647213F8983851AA57F902D7B CustomProperties Pin (PinId=E25FA3CA4D71BE4FF66381A9A6547FDC,PinName="OutputDelegate",Direction="EGPD_Output",PinType.PinCategory="delegate",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.Actor'",MemberName="ReceiveBeginPlay"),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefa` };
-
-
+      // Custom Logic Prefabs.
+    "play music bgm": `Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_0" ExportPath="/Script/BlueprintGraph.K2Node_CallFunction'/Game/ModernRPG/General/Blueprints/Weapon/ConnectedMesh/Weapon/rocket_launcher/test.test:EventGraph.K2Node_CallFunction_0'"
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.GameplayStatics'",MemberName="CreateSound2D")
+   NodePosX=1184
+   AdvancedPinDisplay=Hidden
+   NodeGuid=F1DC56AE41A94D25C97EA28E98415827
+   CustomProperties Pin (PinId=8CC245024E4816E06131FDA8C1A457F0,PinName="execute",PinToolTip="\nExec",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_CallFunction_1 AE3B0E1D44A91D651DB525B1E08EE1F0,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=6094F09D42608C7C17257F94D1ED5CC2,PinName="then",PinToolTip="\nExec",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=C76CD0B945591DE831049EA4F7261ACE,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinToolTip="Target\nGameplay Statics Object Reference",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.GameplayStatics'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultObject="/Script/Engine.Default__GameplayStatics",PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=DC49196D4C1C63416D9E16BA5BF11D93,PinName="WorldContextObject",PinToolTip="World Context Object\nObject Reference",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/CoreUObject.Object'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=True,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=True,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=288C974344E48EBA41CEB98132DEF19D,PinName="Sound",PinToolTip="Sound\nSound Base Object Reference\n\nSound to create.",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.SoundBase'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=5857C6E64A9F4D8D004AC6B0037842DD,PinName="VolumeMultiplier",PinToolTip="Volume Multiplier\nFloat (single-precision)\n\nA linear scalar multiplied with the volume, in order to make the sound louder or softer.",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="1.000000",AutogeneratedDefaultValue="1.000000",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=73886CE9480672E6F794B7801C1571B3,PinName="PitchMultiplier",PinToolTip="Pitch Multiplier\nFloat (single-precision)\n\nA linear scalar multiplied with the pitch.",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="1.000000",AutogeneratedDefaultValue="1.000000",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=36C792354B14034F1BF9D382D2C10FA6,PinName="StartTime",PinToolTip="Start Time\nFloat (single-precision)\n\nHow far into the sound to begin playback at",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0.000000",AutogeneratedDefaultValue="0.000000",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=657BF45F484449854B25E5AC98A42D70,PinName="ConcurrencySettings",PinToolTip="Concurrency Settings\nSound Concurrency Object Reference\n\nOverride concurrency settings package to play sound with",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.SoundConcurrency'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,AutogeneratedDefaultValue="None",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=530672ED417EB230EB4442ACF2083ADD,PinName="bPersistAcrossLevelTransition",PinToolTip="Persist Across Level Transition\nBoolean",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="false",AutogeneratedDefaultValue="false",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=B72FA4064EFA442E62474ABB392D1E9C,PinName="bAutoDestroy",PinToolTip="Auto Destroy\nBoolean\n\nWhether the returned audio component will be automatically cleaned up when the sound finishes (by completing or stopping), or whether it can be reactivated",PinType.PinCategory="bool",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="true",AutogeneratedDefaultValue="true",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=E559DB724C74E1DA792704801E284964,PinName="ReturnValue",PinToolTip="Return Value\nAudio Component Object Reference\n\nAn audio component to manipulate the created sound",Direction="EGPD_Output",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.AudioComponent'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/BlueprintGraph.K2Node_CallFunction Name="K2Node_CallFunction_1" ExportPath="/Script/BlueprintGraph.K2Node_CallFunction'/Game/ModernRPG/General/Blueprints/Weapon/ConnectedMesh/Weapon/rocket_launcher/test.test:EventGraph.K2Node_CallFunction_1'"
+   FunctionReference=(MemberParent="/Script/CoreUObject.Class'/Script/Engine.AudioComponent'",MemberName="FadeIn")
+   NodePosX=848
+   NodePosY=-16
+   AdvancedPinDisplay=Hidden
+   NodeGuid=06F681924A59359E32E17A93447A5F4B
+   CustomProperties Pin (PinId=54B15E204DD5B114392D3C951C413AAF,PinName="execute",PinToolTip="\nExec",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=AE3B0E1D44A91D651DB525B1E08EE1F0,PinName="then",PinToolTip="\nExec",Direction="EGPD_Output",PinType.PinCategory="exec",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,LinkedTo=(K2Node_CallFunction_0 8CC245024E4816E06131FDA8C1A457F0,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=B9EC807347EA75EB824CB4B1A2A0B121,PinName="self",PinFriendlyName=NSLOCTEXT("K2Node", "Target", "Target"),PinToolTip="Target\nAudio Component Object Reference",PinType.PinCategory="object",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Class'/Script/Engine.AudioComponent'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=DFDE55CF4FC8FA759D92A584A0691A19,PinName="FadeInDuration",PinToolTip="Fade in Duration\nFloat (single-precision)\n\nHow long it should take to reach the FadeVolumeLevel",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0.0",AutogeneratedDefaultValue="0.0",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=False,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=41AE3D6B4ACA38344F288ABB228F8BBC,PinName="FadeVolumeLevel",PinToolTip="Fade Volume Level\nFloat (single-precision)\n\nThe percentage of the AudioComponents\'s calculated volume to fade to",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="1.000000",AutogeneratedDefaultValue="1.000000",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=EDF282A44FBF59B74747E281AB7EFD3F,PinName="StartTime",PinToolTip="Start Time\nFloat (single-precision)",PinType.PinCategory="real",PinType.PinSubCategory="float",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=False,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="0.000000",AutogeneratedDefaultValue="0.000000",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+   CustomProperties Pin (PinId=2FBB24CF4873A27F22A0BD84105C3E82,PinName="FadeCurve",PinToolTip="Fade Curve\nEAudioFaderCurve Enum\n\nThe curve to use when interpolating between the old and new volume",PinType.PinCategory="byte",PinType.PinSubCategory="",PinType.PinSubCategoryObject="/Script/CoreUObject.Enum'/Script/Engine.EAudioFaderCurve'",PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,PinType.bIsConst=True,PinType.bIsWeakPointer=False,PinType.bIsUObjectWrapper=False,PinType.bSerializeAsSinglePrecisionFloat=False,DefaultValue="Linear",AutogeneratedDefaultValue="Linear",PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False,bDefaultValueIsReadOnly=False,bDefaultValueIsIgnored=False,bAdvancedView=True,bOrphanedPin=False,)
+End Object
+Begin Object Class=/Script/UnrealEd.EdGraphNode_Comment Name="EdGraphNode_Comment_16" ExportPath="/Script/UnrealEd.EdGraphNode_Comment'/Game/ModernRPG/General/Blueprints/Weapon/ConnectedMesh/Weapon/rocket_launcher/test.test:EventGraph.EdGraphNode_Comment_16'"
+   CommentColor=(R=0.113053,G=0.504737,B=1.000000,A=1.000000)
+   bCommentBubbleVisible_InDetailsPanel=False
+   NodePosX=1200
+   NodePosY=32
+   NodeWidth=256
+   NodeHeight=96
+   bCommentBubblePinned=False
+   bCommentBubbleVisible=False
+   NodeComment="Add your Wav or Cue Here"
+   NodeGuid=2FB90F944143F4FC06744E84E072B07F
+End Object
+` };
 
 
 
@@ -71,8 +101,8 @@ function showSuggestions(value) {
             div.onclick = function() {
                 document.getElementById('keyInput').value = key;
                 suggestionsContainer.innerHTML = '';
-                document.getElementById('customKey').style.display = key === 'IF Key Pressed' ? 'block' : 'none';
-                document.getElementById('customKeyLabel').style.display = key === 'IF Key Pressed' ? 'block' : 'none';
+                document.getElementById('customKey').style.display = key === 'keypress node id' ? 'block' : 'none';
+                document.getElementById('customKeyLabel').style.display = key === 'keypress node id' ? 'block' : 'none';
             };
             suggestionsContainer.appendChild(div);
         }
@@ -86,7 +116,7 @@ function generateOutput() {
         return;
     }
     let nodeText = suggestions[key];
-    if (key === "IF Key Pressed" && document.getElementById('customKey').style.display !== 'none') {
+    if (key === "keypress node id" && document.getElementById('customKey').style.display !== 'none') {
         const customKey = document.getElementById('customKey').value;
         nodeText = nodeText.replace("UserSpecifiedKey", customKey);
     }
